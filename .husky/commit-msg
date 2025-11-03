@@ -1,0 +1,21 @@
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+ALLOWED_TYPES="feat|fix|docs|style|refactor|perf|test|chore|build|ci|revert"
+
+REGEX="^($ALLOWED_TYPES)(\([a-zA-Z0-9-]+\))?: .{5,}$"
+
+if ! [[ $COMMIT_MSG =~ $REGEX ]]; then
+  echo "Error: Invalid commit message format."
+  echo "Expected format: type(optional scope): description"
+  echo "Allowed types: $ALLOWED_TYPES"
+  echo "Example: feat: add login button"
+  echo "Your message: $COMMIT_MSG"
+  exit 1
+fi
+
+FIRST_LINE=$(head -n 1 "$COMMIT_MSG_FILE")
+if [ ${#FIRST_LINE} -gt 72 ]; then
+  echo "Error: Commit subject line should be <= 72 characters."
+  exit 1
+fi
