@@ -12,7 +12,8 @@
     "extract": "lingui extract",
     "compile": "lingui compile --typescript",
     "prepare": "husky",
-    "test": "vitest"
+    "test": "vitest",
+    "test:ci": "vitest run"
   },
   "dependencies": {
     "@base-ui-components/react": "1.0.0-beta.4",

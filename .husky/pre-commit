@@ -2,6 +2,10 @@
 git update-index --again
 
 ./node_modules/.bin/tsc -b --noEmit
-./node_modules/.bin/vitest related --run
+
+FILES=$(git diff --cached --name-only --diff-filter=ACM | tr '\n' ' ')
+if [ -n "$FILES" ]; then
+  pnpm vitest related $FILES --run
+fi
 
 echo "All checks passed."
