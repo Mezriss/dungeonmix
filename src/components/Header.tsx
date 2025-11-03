@@ -1,18 +1,17 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { useContext } from "react";
 import { useSnapshot } from "valtio";
 import { Link } from "wouter";
 import Info from "./Info";
 import Settings from "./Settings";
 import Switch from "./ui/Switch";
 import { BASE_URL } from "@/const";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useBoardState } from "@/providers/BoardStateContext";
 
 import styles from "@/styles/Header.module.css";
 
 export default function Header() {
-  const state = useContext(BoardStateContext);
+  const state = useBoardState();
   const data = useSnapshot(state.data);
   const ui = useSnapshot(state.ui);
 

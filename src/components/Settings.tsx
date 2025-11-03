@@ -1,7 +1,7 @@
 import { t } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react";
 import { Trans } from "@lingui/react/macro";
-import { useCallback, useContext, useId, useMemo, useState } from "react";
+import { useCallback, useId, useMemo, useState } from "react";
 import { useSnapshot } from "valtio";
 import { useLocation } from "wouter";
 import { AlertDialog } from "./ui/AlertDialog";
@@ -10,7 +10,7 @@ import Select from "./ui/Select";
 import Tooltip from "./ui/Tooltip";
 import { BASE_URL, LOCALE_KEY } from "@/const";
 import { dynamicActivate, locales } from "@/i18n";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useBoardState } from "@/providers/BoardStateContext";
 
 import type { ChangeEvent } from "react";
 
@@ -42,7 +42,7 @@ export default function Settings() {
 
 function TrackFadeSetting() {
   const id = useId();
-  const state = useContext(BoardStateContext);
+  const state = useBoardState();
   const data = useSnapshot(state.data);
   const [duration, setDuration] = useState(
     String(data.settings.fadeDuration / 1000),
@@ -69,7 +69,7 @@ function TrackFadeSetting() {
 }
 
 function AreaOpacity() {
-  const state = useContext(BoardStateContext);
+  const state = useBoardState();
   const data = useSnapshot(state.data);
   const id = useId();
 
@@ -125,7 +125,7 @@ function Language() {
 }
 
 function DeleteBoard() {
-  const { actions } = useContext(BoardStateContext);
+  const { actions } = useBoardState();
 
   const [, navigate] = useLocation();
   const [isDialogOpen, setIsDialogOpen] = useState(false);

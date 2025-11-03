@@ -1,10 +1,10 @@
-import { useContext, useEffect } from "react";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useEffect } from "react";
+import { useBoardState } from "@/providers/BoardStateContext";
 
 import type { RefObject } from "react";
 
 export function useZoom(ref: RefObject<HTMLElement>) {
-  const { actions } = useContext(BoardStateContext);
+  const { actions } = useBoardState();
   useEffect(() => {
     const handleWheel = (event: WheelEvent) => {
       const { deltaY } = event;

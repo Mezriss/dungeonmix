@@ -1,8 +1,8 @@
 import { t } from "@lingui/core/macro";
-import { useContext, useEffect, useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useSnapshot } from "valtio";
 import Tooltip from "@/components/ui/Tooltip";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useBoardState } from "@/providers/BoardStateContext";
 import { classes } from "@/util/misc";
 
 import type { KeyboardEvent } from "react";
@@ -11,7 +11,7 @@ import { Minus, Plus } from "lucide-react";
 import styles from "@/styles/Locator.module.css";
 
 export default function Locator() {
-  const state = useContext(BoardStateContext);
+  const state = useBoardState();
   const ui = useSnapshot(state.ui);
   const [zoom, setZoom] = useState(Math.round(ui.zoom * 100) + "%");
   const id = useId();

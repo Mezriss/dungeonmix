@@ -6,7 +6,7 @@ import type { RefObject } from "react";
 
 describe("useDrag", () => {
   let mockRefs: RefObject<HTMLDivElement>[];
-  let mockOnUpdate: ReturnType<typeof vi.fn>;
+  let mockOnUpdate: (moveX: number, moveY: number) => void;
   let mockElements: HTMLDivElement[];
 
   beforeEach(() => {

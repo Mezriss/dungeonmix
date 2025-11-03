@@ -1,11 +1,11 @@
 import { t } from "@lingui/core/macro";
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { createPortal } from "react-dom";
 import { useSnapshot } from "valtio";
 import AreaControls from "./controls/AreaControls";
 import Tooltip from "@/components/ui/Tooltip";
 import { useDrag } from "@/hooks/boardCanvas/useDrag";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useBoardState } from "@/providers/BoardStateContext";
 import { classes } from "@/util/misc";
 
 import type { AudioArea } from "@/state";
@@ -21,7 +21,7 @@ type Props = {
 };
 
 export function AudioArea({ id, rect }: Props) {
-  const state = useContext(BoardStateContext);
+  const state = useBoardState();
   const area = useSnapshot(state.data.areas.find((area) => area.id === id)!);
   const areaRef = useRef<HTMLDivElement>(null!);
   const controlsRef = useRef<HTMLDivElement>(null!);

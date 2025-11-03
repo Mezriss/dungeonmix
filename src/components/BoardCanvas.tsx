@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { useSnapshot } from "valtio";
 import { AudioArea, TempAudioArea } from "./shapes/AudioArea";
 import ImageContainer from "./shapes/ImageContainer";
@@ -7,7 +7,7 @@ import { useBoardPan } from "@/hooks/boardCanvas/useBoardPan";
 import { useImagePlacing } from "@/hooks/boardCanvas/useImagePlacing";
 import { useShapeDrawing } from "@/hooks/boardCanvas/useShapeDrawing";
 import { useZoom } from "@/hooks/boardCanvas/useZoom";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useBoardState } from "@/providers/BoardStateContext";
 
 import type { CSSProperties, PointerEvent } from "react";
 
@@ -15,7 +15,7 @@ import { MapPin } from "lucide-react";
 import styles from "@/styles/BoardCanvas.module.css";
 
 export default function BoardCanvas() {
-  const state = useContext(BoardStateContext);
+  const state = useBoardState();
   const data = useSnapshot(state.data);
   const ui = useSnapshot(state.ui);
   const bodyRef = useRef<HTMLDivElement>(null!);

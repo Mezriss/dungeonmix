@@ -1,12 +1,12 @@
 import { Trans } from "@lingui/react/macro";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useSnapshot } from "valtio";
 import ImageControls from "./controls/ImageControls";
 import { STORE_PREFIX } from "@/const";
 import { useDrag } from "@/hooks/boardCanvas/useDrag";
 import { useIDB } from "@/hooks/useIDB";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useBoardState } from "@/providers/BoardStateContext";
 import { classes } from "@/util/misc";
 
 import { ImageOff } from "lucide-react";
@@ -20,7 +20,7 @@ type Props = {
 export default function ImageContainer({ id, rect }: Props) {
   const containerRef = useRef<HTMLImageElement>(null!);
   const controlsRef = useRef<HTMLDivElement>(null!);
-  const state = useContext(BoardStateContext);
+  const state = useBoardState();
   const image = useSnapshot(state.data.images.find((img) => img.id === id)!);
   const { selectedId, zoom, position } = useSnapshot(state.ui);
   const selected = image.id === selectedId;

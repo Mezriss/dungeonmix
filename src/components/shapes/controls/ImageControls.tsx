@@ -1,8 +1,8 @@
 import { t } from "@lingui/core/macro";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Slider from "@/components/ui/Slider";
 import Tooltip from "@/components/ui/Tooltip";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useBoardState } from "@/providers/BoardStateContext";
 
 import type { Image as ImageType } from "@/state";
 import type { ChangeEvent, PointerEvent } from "react";
@@ -21,7 +21,7 @@ export default function ImageControls({
   handleDragStart,
   containerRef,
 }: Props) {
-  const state = useContext(BoardStateContext);
+  const state = useBoardState();
 
   const [loading, setLoading] = useState(false);
 

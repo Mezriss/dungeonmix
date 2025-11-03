@@ -1,10 +1,9 @@
 import { t } from "@lingui/core/macro";
-import { useContext } from "react";
 import { useSnapshot } from "valtio";
 import TrackAdder from "./TrackAdder";
 import TrackControls from "./TrackControls";
 import Tooltip from "@/components/ui/Tooltip";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useBoardState } from "@/providers/BoardStateContext";
 
 import type { AudioArea } from "@/state";
 import type { Snapshot } from "valtio";
@@ -18,7 +17,7 @@ type Props = {
 };
 
 export default function AreaControls({ area, handleMoveStart }: Props) {
-  const state = useContext(BoardStateContext);
+  const state = useBoardState();
   const data = useSnapshot(state.data);
   return (
     <>

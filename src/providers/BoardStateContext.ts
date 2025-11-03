@@ -1,4 +1,17 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
+
 import type { State } from "@/state";
 
-export const BoardStateContext = createContext<State>(null!);
+const BoardStateContext = createContext<State | undefined>(undefined);
+
+export function useBoardState(): State {
+  const context = useContext(BoardStateContext);
+  if (context === undefined) {
+    throw new Error(
+      "useBoardState must be used within a BoardStateContext.Provider",
+    );
+  }
+  return context;
+}
+
+export { BoardStateContext };

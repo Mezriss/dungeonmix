@@ -1,6 +1,5 @@
-import { useContext } from "react";
 import { useSnapshot } from "valtio";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useBoardState } from "@/providers/BoardStateContext";
 
 import type { PointerEvent } from "react";
 
@@ -9,7 +8,7 @@ type Props = {
 };
 
 export function useImagePlacing({ rect }: Props) {
-  const state = useContext(BoardStateContext);
+  const state = useBoardState();
   const ui = useSnapshot(state.ui);
 
   const placeImage = (e: PointerEvent<HTMLDivElement>) => {

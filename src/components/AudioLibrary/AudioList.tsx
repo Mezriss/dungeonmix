@@ -1,17 +1,17 @@
 import { Collapsible } from "@base-ui-components/react/collapsible";
 import { t } from "@lingui/core/macro";
-import { useContext, useMemo } from "react";
+import { useMemo } from "react";
 import { useSnapshot } from "valtio";
 import { AlertDialogTriggered as AlertDialog } from "@/components/ui/AlertDialog";
 import Tooltip from "@/components/ui/Tooltip";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useBoardState } from "@/providers/BoardStateContext";
 import { classes } from "@/util/misc";
 
 import { Folder, FolderOpen, RefreshCw, X } from "lucide-react";
 import styles from "@/styles/AudioList.module.css";
 
 export default function AudioList() {
-  const state = useContext(BoardStateContext);
+  const state = useBoardState();
 
   const data = useSnapshot(state.data);
   return (
@@ -50,7 +50,7 @@ export default function AudioList() {
 }
 
 function TrackList({ folderId }: { folderId: string }) {
-  const state = useContext(BoardStateContext);
+  const state = useBoardState();
   const data = useSnapshot(state.data);
 
   const list = useMemo(() => {

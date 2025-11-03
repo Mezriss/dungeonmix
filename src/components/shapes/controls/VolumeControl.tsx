@@ -1,8 +1,8 @@
 import { t } from "@lingui/core/macro";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Slider from "@/components/ui/Slider";
 import Tooltip from "@/components/ui/Tooltip";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useBoardState } from "@/providers/BoardStateContext";
 
 import type { Track } from "@/state";
 
@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default function VolumeControl({ areaId, track }: Props) {
-  const { actions } = useContext(BoardStateContext);
+  const { actions } = useBoardState();
   const [volume, setVolume] = useState(track.volume * 100);
   useEffect(() => {
     setVolume(track.volume * 100);

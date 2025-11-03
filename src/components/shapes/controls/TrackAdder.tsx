@@ -1,9 +1,9 @@
 import { Combobox } from "@base-ui-components/react";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useSnapshot } from "valtio";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useBoardState } from "@/providers/BoardStateContext";
 
 import type { FileInfo } from "@/state";
 
@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default function TrackAdder({ children, areaId }: Props) {
-  const state = useContext(BoardStateContext);
+  const state = useBoardState();
   const data = useSnapshot(state.data);
   const [value, setValue] = useState<FileInfo | null>(null);
 

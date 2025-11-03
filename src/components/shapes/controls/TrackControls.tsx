@@ -1,8 +1,7 @@
 import { t } from "@lingui/core/macro";
-import { useContext } from "react";
 import VolumeControl from "./VolumeControl";
 import Tooltip from "@/components/ui/Tooltip";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useBoardState } from "@/providers/BoardStateContext";
 
 import type { AudioArea } from "@/state";
 
@@ -16,7 +15,7 @@ export default function TrackControls({
   areaId: string;
   track: AudioArea["tracks"][number];
 }) {
-  const { actions } = useContext(BoardStateContext);
+  const { actions } = useBoardState();
 
   return (
     <div className={styles.controls}>

@@ -13,7 +13,8 @@
     "compile": "lingui compile --typescript",
     "prepare": "husky",
     "test": "vitest",
-    "test:ci": "vitest run"
+    "test:ci": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@base-ui-components/react": "1.0.0-beta.4",
@@ -41,6 +42,7 @@
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react-swc": "^4.1.0",
+    "@vitest/coverage-v8": "^4.0.6",
     "eslint": "^9.36.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.22",
@@ -52,7 +54,7 @@
     "typescript-eslint": "^8.45.0",
     "vite": "^7.1.7",
     "vite-plugin-pwa": "^1.1.0",
-    "vitest": "^4.0.4"
+    "vitest": "^4.0.6"
   },
   "packageManager": "pnpm@10.18.2+sha512.9fb969fa749b3ade6035e0f109f0b8a60b5d08a1a87fdf72e337da90dcc93336e2280ca4e44f2358a649b83c17959e9993e777c2080879f3801e6f0d999ad3dd"
 }

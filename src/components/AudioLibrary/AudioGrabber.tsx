@@ -1,13 +1,13 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { useContext, useRef, useState } from "react";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useRef, useState } from "react";
+import { useBoardState } from "@/providers/BoardStateContext";
 
 import { CircleX, X } from "lucide-react";
 import styles from "@/styles/AudioGrabber.module.css";
 
 export default function AudioGrabber() {
-  const { actions } = useContext(BoardStateContext);
+  const { actions } = useBoardState();
   const [isDragOver, setIsDragOver] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const dragCounter = useRef(0);

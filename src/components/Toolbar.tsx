@@ -1,9 +1,8 @@
 import { t } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react";
-import { useContext } from "react";
 import { useSnapshot } from "valtio";
 import Tooltip from "./ui/Tooltip";
-import { BoardStateContext } from "@/providers/BoardStateContext";
+import { useBoardState } from "@/providers/BoardStateContext";
 import { classes } from "@/util/misc";
 
 import {
@@ -18,7 +17,7 @@ import styles from "@/styles/Toolbar.module.css";
 
 export default function Toolbar() {
   useLingui();
-  const state = useContext(BoardStateContext);
+  const state = useBoardState();
   const ui = useSnapshot(state.ui);
   if (!ui.editMode)
     return (
