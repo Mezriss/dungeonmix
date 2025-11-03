@@ -62,7 +62,6 @@ export default function TrackAdder({ children, areaId }: Props) {
                   value={track}
                   className={styles.item}
                 >
-                  {/* TODO: show file path */}
                   <div className={styles.itemText}>{track.name}</div>
                 </Combobox.Item>
               )}

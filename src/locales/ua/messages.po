@@ -13,29 +13,29 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 3.8\n"
 
-#: src/components/AudioLibrary/AudioGrabber.tsx:112
+#: src/components/AudioLibrary/AudioGrabber.tsx:97
 msgid " or <0>browse</0>"
 msgstr " або <0>виберіть</0>"
 
-#: src/components/Toolbar.tsx:59
+#: src/components/Toolbar.tsx:58
 msgid "Add circular sound area"
 msgstr "Додати кругову звукову зону"
 
-#: src/components/Info.tsx:52
+#: src/components/Info.tsx:54
 #: src/components/shapes/controls/ImageControls.tsx:54
-#: src/components/Toolbar.tsx:72
+#: src/components/Toolbar.tsx:71
 msgid "Add image"
 msgstr "Додати зображення"
 
-#: src/components/Toolbar.tsx:48
+#: src/components/Toolbar.tsx:47
 msgid "Add rectangular sound area"
 msgstr "Додати прямокутну звукову зону"
 
-#: src/components/Info.tsx:46
+#: src/components/Info.tsx:48
 msgid "Add sound area"
 msgstr "Додати звукову зону"
 
-#: src/components/shapes/controls/AreaControls.tsx:40
+#: src/components/shapes/controls/AreaControls.tsx:39
 msgid "Add track"
 msgstr "Додати трек"
 
@@ -51,7 +51,7 @@ msgstr "Прозорість звукової зони, %"
 msgid "Back to Home"
 msgstr "Повернутися на головну"
 
-#: src/components/Header.tsx:28
+#: src/components/Header.tsx:27
 msgid "Board name"
 msgstr "Назва дошки"
 
@@ -63,36 +63,61 @@ msgstr "Дошку не знайдено"
 msgid "But there is still hope - try <0>returning to title</0> and loading your board again"
 msgstr "Але ще є надія - спробуйте <0>повернутися на головну</0> і завантажити дошку знову"
 
-#: src/components/Info.tsx:55
+#: src/components/Info.tsx:57
 msgid "Click to add an image placeholder. Then use appearing control panel to add image itself."
 msgstr "Натисніть, щоб додати заповнювач для зображення. Потім скористайтеся панеллю керування, що з'явиться, щоб додати саме зображення."
 
-#: src/components/Info.tsx:40
+#: src/components/Info.tsx:42
 msgid "Click to select audio area or an image. You will see a control panel in its center."
 msgstr "Натисніть, щоб вибрати звукову зону або зображення. Ви побачите панель керування в її центрі."
 
-#: src/components/Info.tsx:62
+#: src/components/Info.tsx:64
 msgid "Controls"
 msgstr "Керування"
 
-#: src/Landing.tsx:99
+#: src/actions/board.ts:22
+msgid "Could not update board name"
+msgstr "Не вдалося оновити назву дошки"
+
+#. placeholder {0}: data.files[trackId].name
+#: src/actions/track.ts:51
+msgid "Couldn't access track \"{0}\". Is it still there?"
+msgstr "Не вдалося отримати доступ до треку \"{0}\". Він ще доступний?"
+
+#. placeholder {0}: dirHandle.name
+#. placeholder {0}: handle.name
+#: src/actions/library.ts:94
+#: src/actions/track.ts:46
+msgid "Couldn't get permission to folder \"{0}\". Try restarting your browser and doing it again."
+msgstr "Не вдалося отримати дозвіл на доступ до папки \"{0}\". Спробуйте перезапустити браузер і зробити це ще раз."
+
+#: src/actions/library.ts:88
+#: src/actions/track.ts:39
+msgid "Couldn't resolve directory, your board data is probably corrupt and it would be better to recreate it."
+msgstr "Не вдалося розпізнати каталог, дані вашої дошки, ймовірно, пошкоджені, і краще її створити заново."
+
+#: src/Landing.tsx:100
 msgid "Create New Board"
 msgstr "Створити нову дошку"
 
-#: src/components/Settings.tsx:148
-#: src/components/Settings.tsx:154
+#: src/hooks/useStoredState.ts:25
+msgid "Data for this board got corrupted for unknown reasons and was reset."
+msgstr "Дані для цієї дошки були пошкоджені з невідомих причин і скинуті."
+
+#: src/components/Settings.tsx:145
+#: src/components/Settings.tsx:151
 msgid "Delete"
 msgstr "Видалити"
 
-#: src/components/shapes/controls/AreaControls.tsx:54
+#: src/components/shapes/controls/AreaControls.tsx:53
 msgid "Delete area (there is no undo)"
 msgstr "Видалити зону (скасувати неможливо)"
 
-#: src/components/Settings.tsx:145
+#: src/components/Settings.tsx:142
 msgid "Delete board"
 msgstr "Видалити дошку"
 
-#: src/components/Settings.tsx:152
+#: src/components/Settings.tsx:149
 msgid "Delete Board"
 msgstr "Видалити дошку"
 
@@ -100,23 +125,23 @@ msgstr "Видалити дошку"
 msgid "Delete image"
 msgstr "Видалити зображення"
 
-#: src/components/Settings.tsx:153
+#: src/components/Settings.tsx:150
 msgid "Delete this board? This can't be undone."
 msgstr "Видалити цю дошку? Цю дію неможливо скасувати."
 
-#: src/components/Info.tsx:75
+#: src/components/Info.tsx:77
 msgid "Deselect the current element."
 msgstr "Зняти виділення з поточного елемента."
 
-#: src/components/AudioLibrary/AudioGrabber.tsx:110
+#: src/components/AudioLibrary/AudioGrabber.tsx:95
 msgid "Drag and drop a folder"
 msgstr "Перетягніть папку"
 
-#: src/components/Info.tsx:49
+#: src/components/Info.tsx:51
 msgid "Drag to draw a rectangular or circular area."
 msgstr "Перетягніть, щоб намалювати прямокутну або кругову зону."
 
-#: src/Landing.tsx:68
+#: src/Landing.tsx:69
 msgid "DungeonMix is a web application that allows you to create audio boards for your dungeon maps."
 msgstr "DungeonMix — це веб-додаток, який дозволяє створювати аудіодошки для мап підземель."
 
@@ -124,7 +149,7 @@ msgstr "DungeonMix — це веб-додаток, який дозволяє с�
 msgid "e.g."
 msgstr "напр."
 
-#: src/components/Header.tsx:39
+#: src/components/Header.tsx:38
 msgid "Edit<0/>Mode"
 msgstr "Редагування"
 
@@ -132,19 +157,28 @@ msgstr "Редагування"
 msgid "Error loading image"
 msgstr "Помилка завантаження зображення"
 
-#: src/components/AudioLibrary/AudioGrabber.tsx:81
+#: src/components/AudioLibrary/AudioGrabber.tsx:76
 msgid "Failed to access the dropped folder."
 msgstr "Не вдалося отримати доступ до перетягнутої папки."
 
-#: src/components/AudioLibrary/AudioGrabber.tsx:27
+#. placeholder {0}: handle.name
+#: src/actions/library.ts:59
+msgid "Failed to add folder {0}"
+msgstr "Не вдалося додати папку {0}"
+
+#: src/Landing.tsx:42
+msgid "Failed to load boards list"
+msgstr "Не вдалося завантажити список дощок"
+
+#: src/components/AudioLibrary/AudioGrabber.tsx:23
 msgid "Failed to select directory."
 msgstr "Не вдалося вибрати папку."
 
-#: src/components/AudioLibrary/AudioGrabber.tsx:105
+#: src/components/AudioLibrary/AudioGrabber.tsx:90
 msgid "Give DungeonMix access to a folder with your audio files."
 msgstr "Надайте DungeonMix доступ до папки з вашими аудіофайлами."
 
-#: src/components/shapes/controls/AreaControls.tsx:49
+#: src/components/shapes/controls/AreaControls.tsx:48
 msgid "Hold button to move area"
 msgstr "Утримуйте, щоб перемістити зону"
 
@@ -156,7 +190,7 @@ msgstr "Утримуйте, щоб перемістити зображення"
 msgid "Language"
 msgstr "Мова"
 
-#: src/components/Info.tsx:66
+#: src/components/Info.tsx:68
 msgid "Left Click"
 msgstr "Ліва кнопка миші"
 
@@ -164,11 +198,11 @@ msgstr "Ліва кнопка миші"
 msgid "Loading image..."
 msgstr "Завантаження зображення..."
 
-#: src/components/Info.tsx:78
+#: src/components/Info.tsx:80
 msgid "Middle Mouse (hold)"
 msgstr "Середня кнопка миші (утримувати)"
 
-#: src/components/Info.tsx:84
+#: src/components/Info.tsx:86
 msgid "Mouse Wheel"
 msgstr "Коліщатко миші"
 
@@ -176,28 +210,28 @@ msgstr "Коліщатко миші"
 msgid "No tracks found."
 msgstr "Треків не знайдено."
 
-#: src/Landing.tsx:74
+#: src/Landing.tsx:75
 msgid "Not sure what this is or how to use it?<0/>Watch a <1>video introduction</1>."
 msgstr "Не впевнені, що це чи як цим користуватися?<0/><1>Перегляньте відео-презентацію</1>."
 
-#: src/Landing.tsx:104
+#: src/Landing.tsx:105
 msgid "or load existing board"
 msgstr "або завантажити існуючу дошку"
 
-#: src/components/Info.tsx:81
+#: src/components/Info.tsx:83
 msgid "Pan the board."
 msgstr "Переміщення по дошці."
 
-#: src/components/Toolbar.tsx:26
+#: src/components/Toolbar.tsx:25
 msgid "Place location marker"
 msgstr "Поставити маркер локації"
 
-#: src/components/AudioLibrary/AudioGrabber.tsx:78
+#: src/components/AudioLibrary/AudioGrabber.tsx:74
 msgid "Please drop a folder containing audio files."
 msgstr "Будь ласка, перетягніть папку, що містить аудіофайли."
 
-#: src/components/Info.tsx:15
-#: src/components/Info.tsx:19
+#: src/components/Info.tsx:17
+#: src/components/Info.tsx:21
 msgid "Quick tips"
 msgstr "Короткі поради"
 
@@ -217,11 +251,11 @@ msgstr "Видалити папку"
 msgid "Remove Folder"
 msgstr "Видалити папку"
 
-#: src/components/shapes/controls/TrackControls.tsx:36
+#: src/components/shapes/controls/TrackControls.tsx:35
 msgid "Remove track"
 msgstr "Видалити трек"
 
-#: src/components/Info.tsx:72
+#: src/components/Info.tsx:74
 msgid "Right Click"
 msgstr "Права кнопка миші"
 
@@ -229,8 +263,8 @@ msgstr "Права кнопка миші"
 msgid "Scale Image"
 msgstr "Масштабувати зображення"
 
-#: src/components/Info.tsx:37
-#: src/components/Toolbar.tsx:35
+#: src/components/Info.tsx:39
+#: src/components/Toolbar.tsx:34
 msgid "Select"
 msgstr "Вибрати"
 
@@ -244,10 +278,11 @@ msgid "Settings"
 msgstr "Налаштування"
 
 #: src/components/BoardError.tsx:12
+#: src/components/ErrorToast.tsx:29
 msgid "Something went wrong"
 msgstr "Щось пішло не так"
 
-#: src/components/AudioLibrary/AudioLibrary.tsx:24
+#: src/components/AudioLibrary/AudioLibrary.tsx:23
 msgid "Start here"
 msgstr "Почніть тут"
 
@@ -255,20 +290,20 @@ msgstr "Почніть тут"
 msgid "The board you are looking for does not exist."
 msgstr "Дошка, яку ви шукаєте, не існує."
 
-#: src/components/Info.tsx:23
+#: src/components/Info.tsx:25
 msgid "This app is still in development. There might be bugs or missing features. Suggestions? Bug reports? Get in touch on <0>GitHub</0>."
 msgstr "Цей додаток все ще в розробці. Можуть бути помилки або відсутні функції. Пропозиції? Звіти про помилки? Зв'яжіться з нами на <0>GitHub</0>."
 
-#: src/Landing.tsx:87
+#: src/Landing.tsx:88
 msgid "To provide a seamless experience and conveniently handle your local files, this application uses a feature that is not available in your current browser. For the best experience, please use a recent version of Google Chrome, Microsoft Edge, or Opera."
 msgstr "Для зручної роботи з вашими локальними файлами, цей застосунок використовує функцію, яка недоступна у вашому поточному браузері. Для найкращого досвіду використання, будь ласка, використовуйте останню версію Google Chrome, Microsoft Edge або Opera."
 
-#: src/components/shapes/AudioArea.tsx:85
-#: src/components/shapes/controls/TrackControls.tsx:23
+#: src/components/shapes/AudioArea.tsx:83
+#: src/components/shapes/controls/TrackControls.tsx:22
 msgid "Toggle autoplay"
 msgstr "Перемкнути автовідтворення"
 
-#: src/components/Info.tsx:33
+#: src/components/Info.tsx:35
 msgid "Tools"
 msgstr "Інструменти"
 
@@ -276,12 +311,12 @@ msgstr "Інструменти"
 msgid "Track fade duration, s"
 msgstr "Тривалість затухання треку, с"
 
-#: src/components/Header.tsx:29
-#: src/components/Header.tsx:34
+#: src/components/Header.tsx:28
+#: src/components/Header.tsx:33
 msgid "Untitled board"
 msgstr "Дошка без назви"
 
-#: src/Landing.tsx:35
+#: src/Landing.tsx:36
 msgid "Untitled Board"
 msgstr "Дошка без назви"
 
@@ -289,7 +324,7 @@ msgstr "Дошка без назви"
 msgid "Use middle mouse button to pan around"
 msgstr "Використовуйте середню кнопку миші для переміщення"
 
-#: src/components/Info.tsx:69
+#: src/components/Info.tsx:71
 msgid "Use the currently selected tool."
 msgstr "Використовувати обраний інструмент."
 
@@ -297,10 +332,10 @@ msgstr "Використовувати обраний інструмент."
 msgid "Volume"
 msgstr "Гучність"
 
-#: src/Landing.tsx:63
+#: src/Landing.tsx:64
 msgid "Welcome to <0>DungeonMix</0>"
 msgstr "Ласкаво просимо до <0>DungeonMix</0>"
 
-#: src/components/Info.tsx:87
+#: src/components/Info.tsx:89
 msgid "Zoom in and out."
 msgstr "Збільшення та зменшення масштабу."

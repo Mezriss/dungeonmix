@@ -1,3 +1,4 @@
+import { i18n } from "@lingui/core";
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { FADE_DURATION, STORE_PREFIX } from "@/const";
@@ -18,6 +19,8 @@ vi.mock("@/actions", () => ({
 }));
 
 describe("useStoredState", () => {
+  i18n.loadAndActivate({ locale: "en", messages: {} });
+
   const boardId = "test-board-123";
   const storageKey = STORE_PREFIX + boardId;
 
@@ -99,13 +102,6 @@ describe("useStoredState", () => {
   });
 
   it("should handle corrupted JSON data gracefully", async () => {
-    const consoleErrorSpy = vi
-      .spyOn(console, "error")
-      .mockImplementation(() => {});
-    const consoleInfoSpy = vi
-      .spyOn(console, "info")
-      .mockImplementation(() => {});
-
     localStorage.setItem(storageKey, "invalid-json{{{");
 
     const { result } = renderHook(() => useStoredState(boardId));
@@ -114,20 +110,12 @@ describe("useStoredState", () => {
       expect(result.current.state).not.toBeUndefined();
     });
 
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
-      `Somehow data for board ${boardId} is corrupted`,
-    );
-    expect(consoleInfoSpy).toHaveBeenCalledWith("Resetting board state");
-
     // Should reset to initial state
     const storedData = localStorage.getItem(storageKey);
     expect(storedData).toBeTruthy();
     const parsed = JSON.parse(storedData!);
     expect(parsed.id).toBe(boardId);
     expect(parsed.version).toBe(VERSION);
-
-    consoleErrorSpy.mockRestore();
-    consoleInfoSpy.mockRestore();
   });
 
   it("should run migrations on old version data", async () => {

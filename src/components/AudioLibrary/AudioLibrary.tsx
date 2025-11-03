@@ -19,7 +19,7 @@ export default function AudioLibrary() {
       {data.folders.length ? (
         <AudioList />
       ) : (
-        <div className="info">
+        <div className={styles.info}>
           <Info /> <Trans>Start here</Trans>
         </div>
       )}

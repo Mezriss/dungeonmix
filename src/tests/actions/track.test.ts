@@ -1,3 +1,4 @@
+import { i18n } from "@lingui/core";
 import { Howl } from "howler";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { actions } from "@/actions";
@@ -8,6 +9,8 @@ import type { BoardState, UIState } from "@/state";
 describe("track", () => {
   let data: BoardState;
   let ui: UIState;
+
+  i18n.loadAndActivate({ locale: "en", messages: {} });
 
   vi.mock("idb-keyval", () => ({
     get: vi.fn().mockResolvedValue("test"),

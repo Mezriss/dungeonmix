@@ -1,4 +1,6 @@
 import path from "path";
+import { lingui } from "@lingui/vite-plugin";
+import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vitest/config";
 
 const resolve = {
@@ -7,10 +9,18 @@ const resolve = {
   },
 };
 
+const plugins = [
+  react({
+    plugins: [["@lingui/swc-plugin", {}]],
+  }),
+  lingui(),
+];
+
 export default defineConfig({
   test: {
     projects: [
       {
+        plugins,
         resolve,
         test: {
           name: "actions",
@@ -19,6 +29,7 @@ export default defineConfig({
         },
       },
       {
+        plugins,
         resolve,
         test: {
           globals: true,

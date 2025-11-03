@@ -1,6 +1,8 @@
+import { t } from "@lingui/core/macro";
 import { del, get, getMany, set } from "idb-keyval";
 import { nanoid } from "nanoid";
 import { STORE_PREFIX } from "@/const";
+import { error, warning } from "@/services/errorHandler";
 import { getFilesRecursively, getPermission } from "@/util/file";
 
 import type { BoardState, FileInfo, UIState } from "@/state";
@@ -51,8 +53,11 @@ export const libraryActions = (
           name: handle.name,
         });
         await set(STORE_PREFIX + id, handle);
-      } catch (error) {
-        console.error(`Failed to add folder ${handle.name}: ${error}`);
+      } catch (e) {
+        error(
+          `Failed to add folder ${handle.name}: ${e}`,
+          t`Failed to add folder ${handle.name}`,
+        );
       }
     },
     removeFolder: async (id: string) => {
@@ -69,21 +74,25 @@ export const libraryActions = (
       await del(STORE_PREFIX + id);
     },
     refreshFolder: async (folderId: string) => {
-      // TODO: user visible errors
       const folder = data.folders.find((folder) => folder.id === folderId);
       if (!folder) {
-        return console.error(`Folder ${folderId} is missing from state`);
+        return warning(`Folder ${folderId} is missing from state`);
       }
       const handle: FileSystemDirectoryHandle | undefined = await get(
         STORE_PREFIX + folderId,
       );
 
       if (!handle) {
-        return console.error(
+        return error(
           `Folder ${folderId} handle is missing from storage`,
+          t`Couldn't resolve directory, your board data is probably corrupt and it would be better to recreate it.`,
         );
       }
-      if (!getPermission(handle)) return;
+      if (!getPermission(handle))
+        return error(
+          `Permission denied for folder "${handle.name} (${folderId})`,
+          t`Couldn't get permission to folder "${handle.name}". Try restarting your browser and doing it again.`,
+        );
 
       const files: { path: string; name: string }[] = [];
       for await (const { file, path } of getFilesRecursively(handle)) {

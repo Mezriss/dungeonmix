@@ -1,6 +1,13 @@
+import { t } from "@lingui/core/macro";
 import { Howl } from "howler";
 import { get } from "idb-keyval";
 import { STORE_PREFIX } from "@/const";
+import {
+  error,
+  info,
+  warning,
+  withErrorHandling,
+} from "@/services/errorHandler";
 import { getFileHandleFromPath, getPermission } from "@/util/file";
 import { pointInEllipse, pointInRectangle } from "@/util/misc";
 
@@ -26,12 +33,24 @@ export const trackActions = (
 
   const initTrack = async (trackId: string) => {
     const dirHandle = await get(STORE_PREFIX + data.files[trackId].folderId);
-    try {
-      if (!getPermission(dirHandle)) return;
-      const fileHandle = await getFileHandleFromPath(
-        dirHandle,
-        data.files[trackId].path,
+    if (!dirHandle) {
+      return error(
+        `Directory for ${trackId} is missing from store ${data.files[trackId].folderId}`,
+        t`Couldn't resolve directory, your board data is probably corrupt and it would be better to recreate it.`,
       );
+    }
+    try {
+      if (!getPermission(dirHandle))
+        return error(
+          `Permission denied for folder "${dirHandle.name} (${data.files[trackId].folderId}) on track ${trackId}"`,
+          t`Couldn't get permission to folder "${dirHandle.name}". Try restarting your browser and doing it again.`,
+        );
+      const fileHandle = await withErrorHandling(
+        () => getFileHandleFromPath(dirHandle, data.files[trackId].path),
+        "error",
+        t`Couldn't access track "${data.files[trackId].name}". Is it still there?`,
+      );
+      if (!fileHandle) return;
       const src = URL.createObjectURL(await fileHandle.getFile());
       trackCache.set(
         trackId,
@@ -49,8 +68,8 @@ export const trackActions = (
         src: src,
         status: "stopped",
       };
-    } catch (error) {
-      console.error(error);
+    } catch (e) {
+      error(e as Error, `Track ${trackId} initialization failed`);
     }
   };
 
@@ -58,10 +77,10 @@ export const trackActions = (
     addTrackToArea(areaId: string, trackId: string) {
       const area = data.areas.find((area) => area.id === areaId);
       if (!area) {
-        return console.error(`Area ${areaId} is missing from state`);
+        return warning(`Area ${areaId} is missing from state`);
       }
       if (area.tracks.some((track) => track.trackId === trackId)) {
-        return console.error(`Track ${trackId} is already in area ${areaId}`);
+        return info(`Track ${trackId} is already in area ${areaId}`);
       }
       area.tracks.push({
         trackId,
@@ -72,22 +91,22 @@ export const trackActions = (
     removeTrackFromArea(areaId: string, trackId: string) {
       const area = data.areas.find((area) => area.id === areaId);
       if (!area) {
-        return console.error(`Area ${areaId} is missing from state`);
+        return warning(`Area ${areaId} is missing from state`);
       }
       const index = area.tracks.findIndex((track) => track.trackId === trackId);
       if (index === -1) {
-        return console.error(`Track ${trackId} is missing from area ${areaId}`);
+        return warning(`Track ${trackId} is missing from area ${areaId}`);
       }
       area.tracks.splice(index, 1);
     },
     toggleTrackAutoplay(areaId: string, trackId: string) {
       const area = data.areas.find((area) => area.id === areaId);
       if (!area) {
-        return console.error(`Area ${areaId} is missing from state`);
+        return warning(`Area ${areaId} is missing from state`);
       }
       const track = area.tracks.find((track) => track.trackId === trackId);
       if (!track) {
-        return console.error(`Track ${trackId} is missing from area ${areaId}`);
+        return warning(`Track ${trackId} is missing from area ${areaId}`);
       }
       track.autoplay = !track.autoplay;
       if (ui.marker) {
@@ -97,11 +116,11 @@ export const trackActions = (
     setTrackVolume(areaId: string, trackId: string, volume: number) {
       const area = data.areas.find((area) => area.id === areaId);
       if (!area) {
-        return console.error(`Area ${areaId} is missing from state`);
+        return warning(`Area ${areaId} is missing from state`);
       }
       const track = area.tracks.find((track) => track.trackId === trackId);
       if (!track) {
-        return console.error(`Track ${trackId} is missing from area ${areaId}`);
+        return warning(`Track ${trackId} is missing from area ${areaId}`);
       }
       track.volume = volume;
       // let's assume that user switched to edit mode to quickly adjust volume
@@ -116,31 +135,27 @@ export const trackActions = (
       if (!ui.tracks[trackId]) {
         await initTrack(trackId);
       }
-      try {
-        // possible improvement: don't preview track if any other is playing
-        if (ui.tracks[trackId]?.status === "playing") {
-          trackCache.get(trackId)?.volume(volume);
-        } else if (!volumePreview || volumePreview.trackId !== trackId) {
-          volumePreview = {
-            trackId,
-            howl: new Howl({
-              src: ui.tracks[trackId].src,
-              format: data.files[trackId].format,
-              volume: volume,
-              loop: true,
-              autoplay: false,
-            }),
-            timeout: setTimeout(clearVolumePreview, 3000),
-          };
-          volumePreview.howl.seek(volumePreview.howl.duration() / 2);
-          volumePreview.howl.play();
-        } else {
-          volumePreview.howl.volume(volume);
-          clearTimeout(volumePreview.timeout);
-          volumePreview.timeout = setTimeout(clearVolumePreview, 3000);
-        }
-      } catch (error) {
-        console.error(error);
+      // possible improvement: don't preview track if any other is playing
+      if (ui.tracks[trackId]?.status === "playing") {
+        trackCache.get(trackId)?.volume(volume);
+      } else if (!volumePreview || volumePreview.trackId !== trackId) {
+        volumePreview = {
+          trackId,
+          howl: new Howl({
+            src: ui.tracks[trackId].src,
+            format: data.files[trackId].format,
+            volume: volume,
+            loop: true,
+            autoplay: false,
+          }),
+          timeout: setTimeout(clearVolumePreview, 3000),
+        };
+        volumePreview.howl.seek(volumePreview.howl.duration() / 2);
+        volumePreview.howl.play();
+      } else {
+        volumePreview.howl.volume(volume);
+        clearTimeout(volumePreview.timeout);
+        volumePreview.timeout = setTimeout(clearVolumePreview, 3000);
       }
     },
     setMarker: async (position = ui.marker) => {
@@ -189,7 +204,7 @@ export const trackActions = (
           if (!currentlyPlayingIds.includes(trackId)) {
             const howl = trackCache.get(trackId);
             if (!howl) {
-              return console.error(`Track ${trackId} not found in cache`);
+              return warning(`Track ${trackId} not found in cache`);
             }
             howl.off("fade");
             howl.fade(0, volume, data.settings.fadeDuration);
@@ -203,7 +218,7 @@ export const trackActions = (
       shouldStopIds.forEach((trackId) => {
         const howl = trackCache.get(trackId);
         if (!howl) {
-          return console.error(`Track ${trackId} not found in cache`);
+          return warning(`Track ${trackId} not found in cache`);
         }
         howl.fade(howl.volume(), 0, data.settings.fadeDuration);
         ui.tracks[trackId].status = "fadingout";

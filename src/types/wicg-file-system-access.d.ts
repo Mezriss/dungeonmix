@@ -98,11 +98,6 @@ declare global {
     mode?: FileSystemPermissionMode | undefined;
   }
 
-  // TODO: Implemented natively in TS 5.1, remove
-  interface FileSystemCreateWritableOptions {
-    keepExistingData?: boolean | undefined;
-  }
-
   interface FileSystemGetFileOptions {
     create?: boolean | undefined;
   }

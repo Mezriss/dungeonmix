@@ -1,5 +1,5 @@
 echo "Prettifying..."
-./node_modules/.bin/prettier $(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g') --write --ignore-unknown
+./node_modules/.bin/prettier $(git diff --cached --name-only --diff-filter=ACMR | xargs -I{} sh -c 'test ! -L "{}" && echo "{}"' | sed 's| |\\ |g') --write --ignore-unknown
 git update-index --again
 
 echo "Typechecking..."

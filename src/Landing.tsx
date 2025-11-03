@@ -12,6 +12,7 @@ import {
   VIDEO_INTRO_URL_EN,
   VIDEO_INTRO_URL_UA,
 } from "./const";
+import { error } from "./services/errorHandler";
 import { getInitialBoardState } from "./state";
 
 import { TriangleAlert } from "lucide-react";
@@ -37,8 +38,8 @@ export default function Landing() {
   useEffect(() => {
     try {
       setBoards(JSON.parse(localStorage.getItem(KEY_BOARDS) || "[]"));
-    } catch (error) {
-      console.error(error);
+    } catch (e) {
+      error(e as Error, t`Failed to load boards list`);
     }
   }, []);
 

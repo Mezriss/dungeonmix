@@ -13,8 +13,6 @@ import type { AudioArea } from "@/state";
 import { CirclePause, CirclePlay } from "lucide-react";
 import styles from "@/styles/AudioArea.module.css";
 
-// TODO: resize handles
-
 type Props = {
   id: string;
   rect: { x: number; y: number; width: number; height: number };

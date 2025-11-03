@@ -1,3 +1,4 @@
+import { i18n } from "@lingui/core";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { actions } from "@/actions";
 import { KEY_BOARDS } from "@/const";
@@ -7,6 +8,8 @@ import type { BoardState, UIState } from "@/state";
 import type { Mocked } from "vitest";
 
 describe("board", () => {
+  i18n.loadAndActivate({ locale: "en", messages: {} });
+
   let data: BoardState;
   let ui: UIState;
   let localStorageMock: Mocked<Storage>;
@@ -72,7 +75,10 @@ describe("board", () => {
 
       expect(data.name).toBe(newName);
       expect(localStorageMock.getItem).toHaveBeenCalledWith(KEY_BOARDS);
-      expect(localStorageMock.setItem).not.toHaveBeenCalled();
+      expect(localStorageMock.setItem).toHaveBeenCalledWith(
+        "dungeonmix:boards",
+        '[{"id":"board-1","name":"New Board Name"}]',
+      );
       expect(errorSpy).toHaveBeenCalled();
 
       errorSpy.mockRestore(); // Restore console.error

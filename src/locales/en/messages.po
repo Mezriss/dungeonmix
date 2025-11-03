@@ -13,29 +13,29 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/AudioLibrary/AudioGrabber.tsx:112
+#: src/components/AudioLibrary/AudioGrabber.tsx:97
 msgid " or <0>browse</0>"
 msgstr " or <0>browse</0>"
 
-#: src/components/Toolbar.tsx:59
+#: src/components/Toolbar.tsx:58
 msgid "Add circular sound area"
 msgstr "Add circular sound area"
 
-#: src/components/Info.tsx:52
+#: src/components/Info.tsx:54
 #: src/components/shapes/controls/ImageControls.tsx:54
-#: src/components/Toolbar.tsx:72
+#: src/components/Toolbar.tsx:71
 msgid "Add image"
 msgstr "Add image"
 
-#: src/components/Toolbar.tsx:48
+#: src/components/Toolbar.tsx:47
 msgid "Add rectangular sound area"
 msgstr "Add rectangular sound area"
 
-#: src/components/Info.tsx:46
+#: src/components/Info.tsx:48
 msgid "Add sound area"
 msgstr "Add sound area"
 
-#: src/components/shapes/controls/AreaControls.tsx:40
+#: src/components/shapes/controls/AreaControls.tsx:39
 msgid "Add track"
 msgstr "Add track"
 
@@ -51,7 +51,7 @@ msgstr "Audio area opacity, %"
 msgid "Back to Home"
 msgstr "Back to Home"
 
-#: src/components/Header.tsx:28
+#: src/components/Header.tsx:27
 msgid "Board name"
 msgstr "Board name"
 
@@ -63,36 +63,61 @@ msgstr "Board Not Found"
 msgid "But there is still hope - try <0>returning to title</0> and loading your board again"
 msgstr "But there is still hope - try <0>returning to title</0> and loading your board again"
 
-#: src/components/Info.tsx:55
+#: src/components/Info.tsx:57
 msgid "Click to add an image placeholder. Then use appearing control panel to add image itself."
 msgstr "Click to add an image placeholder. Then use appearing control panel to add image itself."
 
-#: src/components/Info.tsx:40
+#: src/components/Info.tsx:42
 msgid "Click to select audio area or an image. You will see a control panel in its center."
 msgstr "Click to select audio area or an image. You will see a control panel in its center."
 
-#: src/components/Info.tsx:62
+#: src/components/Info.tsx:64
 msgid "Controls"
 msgstr "Controls"
 
-#: src/Landing.tsx:99
+#: src/actions/board.ts:22
+msgid "Could not update board name"
+msgstr "Could not update board name"
+
+#. placeholder {0}: data.files[trackId].name
+#: src/actions/track.ts:51
+msgid "Couldn't access track \"{0}\". Is it still there?"
+msgstr "Couldn't access track \"{0}\". Is it still there?"
+
+#. placeholder {0}: dirHandle.name
+#. placeholder {0}: handle.name
+#: src/actions/library.ts:94
+#: src/actions/track.ts:46
+msgid "Couldn't get permission to folder \"{0}\". Try restarting your browser and doing it again."
+msgstr "Couldn't get permission to folder \"{0}\". Try restarting your browser and doing it again."
+
+#: src/actions/library.ts:88
+#: src/actions/track.ts:39
+msgid "Couldn't resolve directory, your board data is probably corrupt and it would be better to recreate it."
+msgstr "Couldn't resolve directory, your board data is probably corrupt and it would be better to recreate it."
+
+#: src/Landing.tsx:100
 msgid "Create New Board"
 msgstr "Create New Board"
 
-#: src/components/Settings.tsx:148
-#: src/components/Settings.tsx:154
+#: src/hooks/useStoredState.ts:25
+msgid "Data for this board got corrupted for unknown reasons and was reset."
+msgstr "Data for this board got corrupted for unknown reasons and was reset."
+
+#: src/components/Settings.tsx:145
+#: src/components/Settings.tsx:151
 msgid "Delete"
 msgstr "Delete"
 
-#: src/components/shapes/controls/AreaControls.tsx:54
+#: src/components/shapes/controls/AreaControls.tsx:53
 msgid "Delete area (there is no undo)"
 msgstr "Delete area (there is no undo)"
 
-#: src/components/Settings.tsx:145
+#: src/components/Settings.tsx:142
 msgid "Delete board"
 msgstr "Delete board"
 
-#: src/components/Settings.tsx:152
+#: src/components/Settings.tsx:149
 msgid "Delete Board"
 msgstr "Delete Board"
 
@@ -100,23 +125,23 @@ msgstr "Delete Board"
 msgid "Delete image"
 msgstr "Delete image"
 
-#: src/components/Settings.tsx:153
+#: src/components/Settings.tsx:150
 msgid "Delete this board? This can't be undone."
 msgstr "Delete this board? This can't be undone."
 
-#: src/components/Info.tsx:75
+#: src/components/Info.tsx:77
 msgid "Deselect the current element."
 msgstr "Deselect the current element."
 
-#: src/components/AudioLibrary/AudioGrabber.tsx:110
+#: src/components/AudioLibrary/AudioGrabber.tsx:95
 msgid "Drag and drop a folder"
 msgstr "Drag and drop a folder"
 
-#: src/components/Info.tsx:49
+#: src/components/Info.tsx:51
 msgid "Drag to draw a rectangular or circular area."
 msgstr "Drag to draw a rectangular or circular area."
 
-#: src/Landing.tsx:68
+#: src/Landing.tsx:69
 msgid "DungeonMix is a web application that allows you to create audio boards for your dungeon maps."
 msgstr "DungeonMix is a web application that allows you to create audio boards for your dungeon maps."
 
@@ -124,7 +149,7 @@ msgstr "DungeonMix is a web application that allows you to create audio boards f
 msgid "e.g."
 msgstr "e.g."
 
-#: src/components/Header.tsx:39
+#: src/components/Header.tsx:38
 msgid "Edit<0/>Mode"
 msgstr "Edit<0/>Mode"
 
@@ -132,19 +157,28 @@ msgstr "Edit<0/>Mode"
 msgid "Error loading image"
 msgstr "Error loading image"
 
-#: src/components/AudioLibrary/AudioGrabber.tsx:81
+#: src/components/AudioLibrary/AudioGrabber.tsx:76
 msgid "Failed to access the dropped folder."
 msgstr "Failed to access the dropped folder."
 
-#: src/components/AudioLibrary/AudioGrabber.tsx:27
+#. placeholder {0}: handle.name
+#: src/actions/library.ts:59
+msgid "Failed to add folder {0}"
+msgstr "Failed to add folder {0}"
+
+#: src/Landing.tsx:42
+msgid "Failed to load boards list"
+msgstr "Failed to load boards list"
+
+#: src/components/AudioLibrary/AudioGrabber.tsx:23
 msgid "Failed to select directory."
 msgstr "Failed to select directory."
 
-#: src/components/AudioLibrary/AudioGrabber.tsx:105
+#: src/components/AudioLibrary/AudioGrabber.tsx:90
 msgid "Give DungeonMix access to a folder with your audio files."
 msgstr "Give DungeonMix access to a folder with your audio files."
 
-#: src/components/shapes/controls/AreaControls.tsx:49
+#: src/components/shapes/controls/AreaControls.tsx:48
 msgid "Hold button to move area"
 msgstr "Hold button to move area"
 
@@ -156,7 +190,7 @@ msgstr "Hold button to move image"
 msgid "Language"
 msgstr "Language"
 
-#: src/components/Info.tsx:66
+#: src/components/Info.tsx:68
 msgid "Left Click"
 msgstr "Left Click"
 
@@ -164,11 +198,11 @@ msgstr "Left Click"
 msgid "Loading image..."
 msgstr "Loading image..."
 
-#: src/components/Info.tsx:78
+#: src/components/Info.tsx:80
 msgid "Middle Mouse (hold)"
 msgstr "Middle Mouse (hold)"
 
-#: src/components/Info.tsx:84
+#: src/components/Info.tsx:86
 msgid "Mouse Wheel"
 msgstr "Mouse Wheel"
 
@@ -180,28 +214,28 @@ msgstr "No tracks found."
 #~ msgid "Not sure what this is or how to use it? Watch a <0>video introduction</0>"
 #~ msgstr "Not sure what this is or how to use it? Watch a <0>video introduction</0>"
 
-#: src/Landing.tsx:74
+#: src/Landing.tsx:75
 msgid "Not sure what this is or how to use it?<0/>Watch a <1>video introduction</1>."
 msgstr "Not sure what this is or how to use it?<0/>Watch a <1>video introduction</1>."
 
-#: src/Landing.tsx:104
+#: src/Landing.tsx:105
 msgid "or load existing board"
 msgstr "or load existing board"
 
-#: src/components/Info.tsx:81
+#: src/components/Info.tsx:83
 msgid "Pan the board."
 msgstr "Pan the board."
 
-#: src/components/Toolbar.tsx:26
+#: src/components/Toolbar.tsx:25
 msgid "Place location marker"
 msgstr "Place location marker"
 
-#: src/components/AudioLibrary/AudioGrabber.tsx:78
+#: src/components/AudioLibrary/AudioGrabber.tsx:74
 msgid "Please drop a folder containing audio files."
 msgstr "Please drop a folder containing audio files."
 
-#: src/components/Info.tsx:15
-#: src/components/Info.tsx:19
+#: src/components/Info.tsx:17
+#: src/components/Info.tsx:21
 msgid "Quick tips"
 msgstr "Quick tips"
 
@@ -221,11 +255,11 @@ msgstr "Remove folder"
 msgid "Remove Folder"
 msgstr "Remove Folder"
 
-#: src/components/shapes/controls/TrackControls.tsx:36
+#: src/components/shapes/controls/TrackControls.tsx:35
 msgid "Remove track"
 msgstr "Remove track"
 
-#: src/components/Info.tsx:72
+#: src/components/Info.tsx:74
 msgid "Right Click"
 msgstr "Right Click"
 
@@ -233,8 +267,8 @@ msgstr "Right Click"
 msgid "Scale Image"
 msgstr "Scale Image"
 
-#: src/components/Info.tsx:37
-#: src/components/Toolbar.tsx:35
+#: src/components/Info.tsx:39
+#: src/components/Toolbar.tsx:34
 msgid "Select"
 msgstr "Select"
 
@@ -248,10 +282,11 @@ msgid "Settings"
 msgstr "Settings"
 
 #: src/components/BoardError.tsx:12
+#: src/components/ErrorToast.tsx:29
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
-#: src/components/AudioLibrary/AudioLibrary.tsx:24
+#: src/components/AudioLibrary/AudioLibrary.tsx:23
 msgid "Start here"
 msgstr "Start here"
 
@@ -259,20 +294,20 @@ msgstr "Start here"
 msgid "The board you are looking for does not exist."
 msgstr "The board you are looking for does not exist."
 
-#: src/components/Info.tsx:23
+#: src/components/Info.tsx:25
 msgid "This app is still in development. There might be bugs or missing features. Suggestions? Bug reports? Get in touch on <0>GitHub</0>."
 msgstr "This app is still in development. There might be bugs or missing features. Suggestions? Bug reports? Get in touch on <0>GitHub</0>."
 
-#: src/Landing.tsx:87
+#: src/Landing.tsx:88
 msgid "To provide a seamless experience and conveniently handle your local files, this application uses a feature that is not available in your current browser. For the best experience, please use a recent version of Google Chrome, Microsoft Edge, or Opera."
 msgstr "To provide a seamless experience and conveniently handle your local files, this application uses a feature that is not available in your current browser. For the best experience, please use a recent version of Google Chrome, Microsoft Edge, or Opera."
 
-#: src/components/shapes/AudioArea.tsx:85
-#: src/components/shapes/controls/TrackControls.tsx:23
+#: src/components/shapes/AudioArea.tsx:83
+#: src/components/shapes/controls/TrackControls.tsx:22
 msgid "Toggle autoplay"
 msgstr "Toggle autoplay"
 
-#: src/components/Info.tsx:33
+#: src/components/Info.tsx:35
 msgid "Tools"
 msgstr "Tools"
 
@@ -280,12 +315,12 @@ msgstr "Tools"
 msgid "Track fade duration, s"
 msgstr "Track fade duration, s"
 
-#: src/components/Header.tsx:29
-#: src/components/Header.tsx:34
+#: src/components/Header.tsx:28
+#: src/components/Header.tsx:33
 msgid "Untitled board"
 msgstr "Untitled board"
 
-#: src/Landing.tsx:35
+#: src/Landing.tsx:36
 msgid "Untitled Board"
 msgstr "Untitled Board"
 
@@ -293,7 +328,7 @@ msgstr "Untitled Board"
 msgid "Use middle mouse button to pan around"
 msgstr "Use middle mouse button to pan around"
 
-#: src/components/Info.tsx:69
+#: src/components/Info.tsx:71
 msgid "Use the currently selected tool."
 msgstr "Use the currently selected tool."
 
@@ -301,10 +336,10 @@ msgstr "Use the currently selected tool."
 msgid "Volume"
 msgstr "Volume"
 
-#: src/Landing.tsx:63
+#: src/Landing.tsx:64
 msgid "Welcome to <0>DungeonMix</0>"
 msgstr "Welcome to <0>DungeonMix</0>"
 
-#: src/components/Info.tsx:87
+#: src/components/Info.tsx:89
 msgid "Zoom in and out."
 msgstr "Zoom in and out."

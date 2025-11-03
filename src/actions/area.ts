@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 import { MIN_AREA_SIZE } from "@/const";
+import { warning } from "@/services/errorHandler";
 
 import type { AudioArea, BoardState, UIState } from "@/state";
 
@@ -19,14 +20,14 @@ export const areaActions = (data: BoardState, ui: UIState) => ({
   deleteArea: (id: string) => {
     const index = data.areas.findIndex((area) => area.id === id);
     if (index === -1) {
-      return console.error(`Area ${id} is missing from state`);
+      return warning(`Area ${id} is missing from state`);
     }
     data.areas.splice(index, 1);
   },
   moveArea: (id: string, x: number, y: number) => {
     const area = data.areas.find((area) => area.id === id);
     if (!area) {
-      return console.error(`Area ${id} is missing from state`);
+      return warning(`Area ${id} is missing from state`);
     }
     area.x += x;
     area.y += y;

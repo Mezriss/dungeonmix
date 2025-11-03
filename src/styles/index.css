@@ -89,42 +89,6 @@ h1 {
   }
 }
 
-.info,
-.error {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-radius: 0.5rem;
-  padding: 0.5rem;
-  border: 1px solid;
-  & > div {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-}
-.info {
-  border-color: var(--color-accent);
-  & svg {
-    color: var(--color-accent);
-  }
-}
-.error {
-  justify-content: space-between;
-  border-color: var(--color-red);
-  & svg {
-    color: var(--color-red);
-  }
-  .dismiss {
-    aspect-ratio: 1;
-    justify-self: end;
-    svg {
-      cursor: pointer;
-      color: var(--color-primary);
-    }
-  }
-}
-
 .backdrop {
   position: fixed;
   min-height: 100dvh;

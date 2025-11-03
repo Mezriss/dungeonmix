@@ -131,13 +131,10 @@ function DeleteBoard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const deleteBoard = useCallback(() => {
-    try {
-      actions.deleteBoard();
-      navigate(`${BASE_URL}/`);
-    } catch (e) {
-      console.error(e);
-    }
+    actions.deleteBoard();
+    navigate(`${BASE_URL}/`);
   }, [actions, navigate]);
+
   return (
     <>
       <div>

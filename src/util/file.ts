@@ -55,7 +55,6 @@ export async function getPermission(
 ) {
   if ((await handle.queryPermission({ mode: "read" })) !== "granted") {
     if ((await handle.requestPermission({ mode: "read" })) !== "granted") {
-      console.error(`Couldn't get permission for file ${handle.name}`);
       return false;
     }
   }

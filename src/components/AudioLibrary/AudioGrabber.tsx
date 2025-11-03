@@ -2,29 +2,25 @@ import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { useRef, useState } from "react";
 import { useBoardState } from "@/providers/BoardStateContext";
+import { error } from "@/services/errorHandler";
 
-import { CircleX, X } from "lucide-react";
 import styles from "@/styles/AudioGrabber.module.css";
 
 export default function AudioGrabber() {
   const { actions } = useBoardState();
   const [isDragOver, setIsDragOver] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const dragCounter = useRef(0);
 
   const selectDirectory = async () => {
     try {
-      setError(null);
-
       const handle = await window.showDirectoryPicker({
         mode: "read",
       });
       await actions.addFolder(handle);
-    } catch (error: unknown) {
-      const err = error as { name?: string };
+    } catch (e: unknown) {
+      const err = e as { name?: string };
       if (err.name !== "AbortError") {
-        console.error("Error selecting directory:", error);
-        setError(t`Failed to select directory.`);
+        error(e as Error, t`Failed to select directory.`);
       }
     }
   };
@@ -75,25 +71,14 @@ export default function AudioGrabber() {
         }
       }
 
-      setError(t`Please drop a folder containing audio files.`);
-    } catch (error) {
-      console.error("Error handling dropped directory:", error);
-      setError(t`Failed to access the dropped folder.`);
+      error(null, t`Please drop a folder containing audio files.`);
+    } catch (e) {
+      error(e as Error, t`Failed to access the dropped folder.`);
     }
   };
 
   return (
     <>
-      {error && (
-        <div className="error">
-          <div>
-            <CircleX /> {error}
-          </div>
-          <div className="dismiss" onClick={() => setError(null)}>
-            <X size={16} />
-          </div>
-        </div>
-      )}
       <div
         className={`${styles.dropArea} ${isDragOver ? styles.dragOver : ""}`}
         onDragEnter={handleDragEnter}

@@ -1,3 +1,4 @@
+import { t } from "@lingui/core/macro";
 import { useEffect, useState } from "react";
 import { proxy, subscribe } from "valtio";
 import { actions } from "../actions";
@@ -8,6 +9,7 @@ import {
   migrations,
   VERSION,
 } from "../state";
+import { error } from "@/services/errorHandler";
 
 import type { BoardState, State } from "../state";
 
@@ -18,10 +20,10 @@ function loadBoardState(id: string): State | null {
     try {
       data = JSON.parse(stored);
     } catch {
-      // TODO: user visible error
-      console.error(`Somehow data for board ${id} is corrupted`);
-      console.error(stored);
-      console.info("Resetting board state");
+      error(
+        `Somehow data for board ${id} is corrupted: [${stored}]`,
+        t`Data for this board got corrupted for unknown reasons and was reset.`,
+      );
       data = getInitialBoardState(id);
       localStorage.setItem(STORE_PREFIX + id, JSON.stringify(data));
     }

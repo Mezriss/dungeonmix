@@ -1,6 +1,7 @@
 import { del, set } from "idb-keyval";
 import { nanoid } from "nanoid";
 import { STORE_PREFIX } from "@/const";
+import { warning, withErrorHandling } from "@/services/errorHandler";
 
 import type { BoardState } from "@/state";
 
@@ -19,7 +20,7 @@ export const imageActions = (data: BoardState) => ({
   moveImage: (id: string, x: number, y: number) => {
     const image = data.images.find((image) => image.id === id);
     if (!image) {
-      return console.error(`Image with id ${id} not found`);
+      return warning(`Image with id ${id} not found`);
     }
     image.x += x;
     image.y += y;
@@ -27,27 +28,23 @@ export const imageActions = (data: BoardState) => ({
   loadImage: async (id: string, file: File) => {
     const image = data.images.find((image) => image.id === id);
     if (!image) {
-      return console.error(`Image with id ${id} not found`);
+      return warning(`Image placeholder ${id} is not in state`);
     }
     const assetId = nanoid();
-    try {
-      await set(STORE_PREFIX + assetId, file);
-    } catch (error) {
-      console.error(error);
-    }
+    await withErrorHandling(() => set(STORE_PREFIX + assetId, file), "error");
     image.assetId = assetId;
   },
   setImageScale: (id: string, scale: number) => {
     const image = data.images.find((image) => image.id === id);
     if (!image) {
-      return console.error(`Image with id ${id} not found`);
+      return warning(`Image with id ${id} not found`);
     }
     image.scale = scale;
   },
   deleteImage: (id: string) => {
     const image = data.images.find((image) => image.id === id);
     if (!image) {
-      return console.error(`Image with id ${id} not found`);
+      return warning(`Image with id ${id} not found`);
     }
     const assetId = image.assetId;
     if (assetId) {
