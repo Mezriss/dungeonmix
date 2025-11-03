@@ -5,6 +5,9 @@ git update-index --again
 echo "Typechecking..."
 ./node_modules/.bin/tsc -b --noEmit
 
+echo "Linting..."
+./node_modules/.bin/eslint .
+
 echo "Running tests..."
 FILES=$(git diff --cached --name-only --diff-filter=ACM | tr '\n' ' ')
 if [ -n "$FILES" ]; then

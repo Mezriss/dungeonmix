@@ -22,9 +22,9 @@ describe("useZoom", () => {
     };
 
     mockState = {
-      data: {} as any,
-      ui: {} as any,
-      actions: mockActions as any,
+      data: {} as State["data"],
+      ui: {} as State["ui"],
+      actions: mockActions as unknown as State["actions"],
     };
 
     mockElement = document.createElement("div");
@@ -300,7 +300,7 @@ describe("useZoom", () => {
       changeZoom: vi.fn(),
     };
 
-    mockState.actions = newMockActions as any;
+    mockState.actions = newMockActions as unknown as State["actions"];
 
     // Force rerender
     rerender();

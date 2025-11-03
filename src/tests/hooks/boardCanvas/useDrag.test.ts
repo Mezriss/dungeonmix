@@ -22,10 +22,11 @@ describe("useDrag", () => {
     vi.clearAllMocks();
   });
 
-  const createPointerEvent = (clientX: number, clientY: number): any => ({
-    clientX,
-    clientY,
-  });
+  const createPointerEvent = (clientX: number, clientY: number) =>
+    ({
+      clientX,
+      clientY,
+    }) as React.PointerEvent<HTMLButtonElement>;
 
   it("should return onDragStart function", () => {
     const { result } = renderHook(() =>

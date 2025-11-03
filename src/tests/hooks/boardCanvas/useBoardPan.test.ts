@@ -22,9 +22,9 @@ describe("useBoardPan", () => {
     };
 
     mockState = {
-      data: {} as any,
-      ui: {} as any,
-      actions: mockActions as any,
+      data: {} as State["data"],
+      ui: {} as State["ui"],
+      actions: mockActions as unknown as State["actions"],
     };
 
     vi.clearAllMocks();
@@ -35,15 +35,12 @@ describe("useBoardPan", () => {
       createElement(BoardStateContext.Provider, { value: mockState }, children);
   };
 
-  const createPointerEvent = (
-    clientX: number,
-    clientY: number,
-    buttons = 4,
-  ): any => ({
-    clientX,
-    clientY,
-    buttons,
-  });
+  const createPointerEvent = (clientX: number, clientY: number, buttons = 4) =>
+    ({
+      clientX,
+      clientY,
+      buttons,
+    }) as React.PointerEvent<HTMLDivElement>;
 
   it("should return initial panDelta of { x: 0, y: 0 }", () => {
     const { result } = renderHook(() => useBoardPan(), {

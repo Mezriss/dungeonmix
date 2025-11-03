@@ -44,9 +44,9 @@ describe("useImagePlacing", () => {
     });
 
     mockState = {
-      data: {} as any,
+      data: {} as State["data"],
       ui: mockUI,
-      actions: mockActions as any,
+      actions: mockActions as unknown as State["actions"],
     };
 
     rect = { x: 100, y: 100, width: 800, height: 600 };
@@ -64,20 +64,21 @@ describe("useImagePlacing", () => {
     clientY: number,
     buttons = 1,
     target?: Partial<HTMLElement>,
-  ): any => ({
-    clientX,
-    clientY,
-    buttons,
-    target: {
-      closest: vi.fn((selector: string) => {
-        if (selector === "#root") return true;
-        if (selector === "button") return target?.closest?.(selector) || null;
-        if (selector === "label") return target?.closest?.(selector) || null;
-        return null;
-      }),
-      ...target,
-    },
-  });
+  ) =>
+    ({
+      clientX,
+      clientY,
+      buttons,
+      target: {
+        closest: vi.fn((selector: string) => {
+          if (selector === "#root") return true;
+          if (selector === "button") return target?.closest?.(selector) || null;
+          if (selector === "label") return target?.closest?.(selector) || null;
+          return null;
+        }),
+        ...target,
+      },
+    }) as unknown as React.PointerEvent<HTMLDivElement>;
 
   it("should return placeImage function", () => {
     const { result } = renderHook(() => useImagePlacing({ rect }), {
@@ -211,9 +212,7 @@ describe("useImagePlacing", () => {
     };
 
     act(() => {
-      result.current.placeImage(
-        createPointerEvent(500, 400, 1, mockTarget as any),
-      );
+      result.current.placeImage(createPointerEvent(500, 400, 1, mockTarget));
     });
 
     expect(mockActions.addImage).not.toHaveBeenCalled();
@@ -234,9 +233,7 @@ describe("useImagePlacing", () => {
     };
 
     act(() => {
-      result.current.placeImage(
-        createPointerEvent(500, 400, 1, mockTarget as any),
-      );
+      result.current.placeImage(createPointerEvent(500, 400, 1, mockTarget));
     });
 
     expect(mockActions.addImage).not.toHaveBeenCalled();
@@ -256,9 +253,7 @@ describe("useImagePlacing", () => {
     };
 
     act(() => {
-      result.current.placeImage(
-        createPointerEvent(500, 400, 1, mockTarget as any),
-      );
+      result.current.placeImage(createPointerEvent(500, 400, 1, mockTarget));
     });
 
     expect(mockActions.addImage).not.toHaveBeenCalled();

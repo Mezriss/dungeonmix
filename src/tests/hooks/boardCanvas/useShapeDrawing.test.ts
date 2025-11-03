@@ -42,9 +42,9 @@ describe("useShapeDrawing", () => {
     });
 
     mockState = {
-      data: {} as any,
+      data: {} as State["data"],
       ui: mockUI,
-      actions: mockActions as any,
+      actions: mockActions as unknown as State["actions"],
     };
 
     rect = { x: 100, y: 100, width: 800, height: 600 };
@@ -62,19 +62,20 @@ describe("useShapeDrawing", () => {
     clientY: number,
     buttons = 1,
     target?: Partial<HTMLElement>,
-  ): any => ({
-    clientX,
-    clientY,
-    buttons,
-    target: {
-      closest: vi.fn((selector: string) => {
-        if (selector === "#root") return true;
-        if (selector === "button") return target?.closest?.(selector) || null;
-        return null;
-      }),
-      ...target,
-    },
-  });
+  ) =>
+    ({
+      clientX,
+      clientY,
+      buttons,
+      target: {
+        closest: vi.fn((selector: string) => {
+          if (selector === "#root") return true;
+          if (selector === "button") return target?.closest?.(selector) || null;
+          return null;
+        }),
+        ...target,
+      },
+    }) as unknown as React.PointerEvent<HTMLDivElement>;
 
   it("should return tempShape, startDrawing, draw, and endDrawing", () => {
     const { result } = renderHook(() => useShapeDrawing({ rect }), {
@@ -183,9 +184,7 @@ describe("useShapeDrawing", () => {
     };
 
     act(() => {
-      result.current.startDrawing(
-        createPointerEvent(300, 250, 1, mockTarget as any),
-      );
+      result.current.startDrawing(createPointerEvent(300, 250, 1, mockTarget));
     });
 
     expect(result.current.tempShape).toBeNull();
@@ -204,9 +203,7 @@ describe("useShapeDrawing", () => {
     };
 
     act(() => {
-      result.current.startDrawing(
-        createPointerEvent(300, 250, 1, mockTarget as any),
-      );
+      result.current.startDrawing(createPointerEvent(300, 250, 1, mockTarget));
     });
 
     expect(result.current.tempShape).toBeNull();
