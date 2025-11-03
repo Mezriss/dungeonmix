@@ -1,4 +1,5 @@
 import { nanoid } from "nanoid";
+import { MIN_AREA_SIZE } from "@/const";
 
 import type { AudioArea, BoardState, UIState } from "@/state";
 
@@ -9,8 +10,8 @@ export const areaActions = (data: BoardState, ui: UIState) => ({
       id: nanoid(),
     };
 
-    area.width = Math.max(area.width, 100);
-    area.height = Math.max(area.height, 100);
+    area.width = Math.max(area.width, MIN_AREA_SIZE);
+    area.height = Math.max(area.height, MIN_AREA_SIZE);
     data.areas.push(area);
     ui.selectedId = area.id;
   },

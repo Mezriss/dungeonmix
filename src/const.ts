@@ -8,6 +8,8 @@ export const FADE_DURATION = 2500;
 export const MIN_ZOOM = 0.1;
 export const MAX_ZOOM = 3;
 
+export const MIN_AREA_SIZE = 100;
+
 export const GITHUB_URL = "https://github.com/Mezriss/DungeonMix";
 export const VIDEO_INTRO_URL_EN = "https://youtu.be/8hyRCVuhfoI";
 export const VIDEO_INTRO_URL_UA = "https://youtu.be/KhNrx5BMK68";
