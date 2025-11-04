@@ -1,0 +1,39 @@
+{
+  "name": "DungeonMix",
+  "short_name": "DungeonMix",
+  "description": "An app for creating audio boards for your game sessions",
+  "start_url": "/dungeonmix/",
+  "scope": "/dungeonmix/",
+  "display": "standalone",
+  "background_color": "#0E0F11",
+  "theme_color": "#D5D8DE",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/dungeonmix/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/dungeonmix/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/dungeonmix/icon-192x192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/dungeonmix/icon-512x512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["entertainment", "games", "utilities"],
+  "screenshots": []
+}
