@@ -1,0 +1,30 @@
+services:
+  playwright:
+    build:
+      context: .
+      dockerfile: Dockerfile.playwright
+    volumes:
+      - ./:/app:Z
+      - /app/node_modules
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+    working_dir: /app
+    environment:
+      - CI=true
+      - DISPLAY=${DISPLAY:-:0}
+    ipc: host
+    network_mode: host
+    security_opt:
+      - seccomp=unconfined
+      - label=disable
+    command: pnpm exec playwright test
+
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.playwright
+    volumes:
+      - ./:/app:Z
+      - /app/node_modules
+    working_dir: /app
+    network_mode: host
+    command: pnpm run dev --host

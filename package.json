@@ -14,7 +14,11 @@
     "prepare": "husky",
     "test": "vitest",
     "test:ci": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "podman-compose run --rm playwright",
+    "test:e2e:ui": "xhost +local: && podman-compose run --rm playwright pnpm exec playwright test --ui-host=localhost; xhost -local:",
+    "test:e2e:headed": "xhost +local: && podman-compose run --rm playwright pnpm exec playwright test --headed; xhost -local:",
+    "test:e2e:debug": "xhost +local: && podman-compose run --rm playwright pnpm exec playwright test --debug; xhost -local:"
   },
   "dependencies": {
     "@base-ui-components/react": "1.0.0-beta.4",
@@ -36,6 +40,7 @@
     "@lingui/cli": "^5.5.1",
     "@lingui/swc-plugin": "^5.6.1",
     "@lingui/vite-plugin": "^5.5.1",
+    "@playwright/test": "^1.56.1",
     "@testing-library/react": "^16.3.0",
     "@types/howler": "^2.2.12",
     "@types/node": "^24.6.0",
