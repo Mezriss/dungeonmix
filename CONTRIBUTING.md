@@ -1,37 +1,80 @@
 # Contributing
 
-## Core Principles
+Thank you for your interest in contributing to DungeonMix! This document focuses on code contributions. For non-code contributions, such as feature proposals or bug reports that aren't tied to a specific part of the codebase, feel free to create a free-form discussion in [GitHub Discussions](https://github.com/Mezriss/dungeonmix/discussions).
 
-- Dependencies: Do not add new dependencies. Pull requests that introduce pnpm install changes or modify pnpm-lock.yaml will be rejected. This is a strict requirement to control the dependency footprint.
-- Testing: New or modified state actions or hooks must include corresponding unit tests. Changes without adequate tests will not be merged.
-- Localization: All new or modified user-facing strings must be wrapped in the Lingui macro (<Trans>, t``, etc.). This must be explicitly noted in the pull request description.
+## Working with the Codebase
 
-## Local Development
+### Package Manager
 
-The project uses pnpm for package management. A pre-commit hook is configured with Husky to run tsc, prettier, and vitest.
-While the hook formats code automatically, configuring your IDE to format on save is highly recommended for a better development workflow.
+DungeonMix uses pnpm exclusively. It supports the npm API, so you can run all the usual commands by prefixing them with "p", such as `pnpm install && pnpm run dev` to get started.
+
+### Code Quality Tools
+
+DungeonMix uses the following tools to maintain codebase consistency and minimize regressions:
+
+- Prettier
+- TypeScript
+- ESLint
+- Vitest
+
+These tools run automatically in a pre-commit hook (via Husky) and should never be skipped. Consider configuring your IDE to format code with Prettier on save for a smoother workflow.
+
+### Commit Message Conventions
+
+Commit messages must follow a specific format to maintain consistency and clarity. The format is enforced by a pre-commit hook and uses the following structure:
+
+`type(scope?): message`
+
+- **Type**: Must be one of the following: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `build`, `ci`, `revert`.
+- **Scope** (optional): A brief identifier in parentheses, using alphanumeric characters and hyphens (e.g., `(ui)` or `(state-management)`).
+- **Message**: A concise description starting with a space after the colon, at least 5 characters long.
+
+Example: `feat(ui): add resize handles to areas`
+
+### Dependency Management
+
+We aim to keep both the app size and installation footprint as small as possible. New dependencies will only be added if they provide significant benefits and have no sub-dependencies. Reducing the number of dependencies remains an ongoing roadmap goal.
+
+### Localization
+
+DungeonMix uses Lingui for localization. Every user-facing string should be wrapped in the `<Trans/>` macro if it's in a component body, or the `t` macro if passed as a variable. If you add or modify translatable strings, follow these steps:
+
+1. Run `pnpm run extract` to update the translation source files (messages.po).
+2. If you speak the language, add translations (you can use Poedit or similar tools to edit locale files).
+3. Run `pnpm run compile` to update the generated messages files (messages.ts).
+4. Explicitly state what was changed or added in your pull request.
+
+If you don't speak the language and can't verify a machine translation, leave the strings untranslated - they will be handled separately.
+
+### Testing
+
+DungeonMix aims for high test coverage, especially in "business logic" areas like state actions and hooks. If you modify these parts of the codebase, update existing tests or add new ones to cover your changes.
+
+### Backward Compatibility
+
+Changes must not break existing user boards. A basic versioning and migration system is in place to ensure this. If you modify `BoardState`:
+
+1. Update `getInitialBoardState()` to incorporate your changes, if applicable.
+2. Bump the `VERSION` constant in `state.ts`.
+3. Add a migration function to the `migrations` array in `state.ts`. These functions update data from older board versions after loading from storage but before populating the board state.
 
 ## Reporting Bugs
 
-1. Search Existing Issues: Before submitting a new bug report, search the existing issues to ensure the bug has not already been reported.
-2. Reproduce the Issue: Confirm that the bug is reproducible with the latest version of the master branch.
-3. Create a New Issue: If the bug is new and reproducible, create a new issue. Provide a concise and descriptive title.
-4. Issue Body: In the body of the issue, include the following:
-   - A clear, step-by-step description of how to reproduce the bug.
-   - A description of the expected behavior.
-   - A description of the actual behavior.
-   - Any relevant environment details (e.g., browser version, operating system).
-
-## Feature Requests
-
-New feature ideas and proposals should be submitted to [GitHub Discussions](https://github.com/Mezriss/dungeonmix/discussions).
+1. **Search Existing Issues**: Before submitting a new bug report, search the existing issues to ensure it hasn't already been reported.
+2. **Reproduce the Issue**: Confirm the bug is reproducible on the latest version of the `master` branch.
+3. **Create a New Issue**: If it's new and reproducible, create an issue with a concise, descriptive title.
+4. **Issue Body**: Include:
+   - Step-by-step reproduction instructions.
+   - Expected behavior.
+   - Actual behavior.
+   - Relevant environment details (e.g., browser version, operating system).
 
 ## Pull Request Process
 
-1. Fork and Clone: Fork the repository and create a local clone.
-2. Create a Feature Branch: Create a new branch from an up-to-date master branch. Name the branch descriptively (e.g., feat/area-resize-handles or fix/header-layout-bug).
-3. Implement Changes: Make your code changes, adhering to the principles outlined above (no new dependencies, add tests, handle localization).
-4. Commit Changes: Make atomic commits with clear and concise messages.
-5. Push and Open PR: Push your feature branch to your fork and open a pull request against the original repository's master branch.
-6. PR Description: The pull request description must be clear and provide context for the changes. It should link to the corresponding issue or discussion it resolves.
-7. Review: The pull request will be reviewed. Address any feedback by pushing additional commits to your feature branch. The pull request will update automatically.
+1. **Fork and Clone**: Fork the repository and clone it locally.
+2. **Create a Feature Branch**: Branch from an up-to-date `master` branch. Use a descriptive name (e.g., `feat/area-resize-handles` or `fix/header-layout-bug`).
+3. **Implement Changes**: Make your changes, following the guidelines above (e.g., no unnecessary dependencies, add tests, handle localization).
+4. **Commit Changes**: Use atomic commits with clear, concise messages that adhere to the commit message conventions.
+5. **Push and Open PR**: Push your branch to your fork and open a pull request against the original repository's `master` branch.
+6. **PR Description**: Provide a clear description with context, linking to any related issues or discussions.
+7. **Review**: Address feedback by pushing additional commits to your branch—the PR will update automatically.
