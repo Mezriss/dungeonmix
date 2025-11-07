@@ -89,6 +89,7 @@ export default function BoardCanvas() {
       onPointerLeave={handlePointerLeave}
       style={style}
       onContextMenu={(e) => e.preventDefault()}
+      data-testid="board-canvas"
     >
       <div
         className={styles.positioner}

@@ -30,7 +30,7 @@ export default function Toolbar() {
       </div>
     );
   return (
-    <div className={classes(styles.toolbar, "panel")}>
+    <div className={classes(styles.toolbar, "panel")} data-testid="toolbar">
       <Tooltip text={t`Select`} side="right">
         <button
           onClick={() => state.actions.switchTool("select")}
