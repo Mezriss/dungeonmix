@@ -16,9 +16,7 @@
     "test:ci": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "podman-compose run --rm playwright",
-    "test:e2e:ui": "xhost +local: && podman-compose run --rm playwright pnpm exec playwright test --ui-host=localhost; xhost -local:",
-    "test:e2e:headed": "xhost +local: && podman-compose run --rm playwright pnpm exec playwright test --headed; xhost -local:",
-    "test:e2e:debug": "xhost +local: && podman-compose run --rm playwright pnpm exec playwright test --debug; xhost -local:"
+    "test:e2e:ui": "xhost +local: && podman-compose run --rm playwright pnpm exec playwright test --ui-host=localhost; xhost -local:"
   },
   "dependencies": {
     "@base-ui-components/react": "1.0.0-beta.4",
